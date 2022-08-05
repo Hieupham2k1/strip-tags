@@ -1,0 +1,63 @@
+<input id="input" value="<div>123</div>" />
+<button onclick="proccess()">proccess</button>
+<button onclick="prev()">prev</button>
+<button onclick="next()">next</button>
+<script>
+let ans = "";
+
+let index = 0;
+const proccess = () => {
+    
+let enter = false;
+    
+
+
+let str = document.getElementById("input").value;    
+for(let i = 0; i < str.length; i++){
+        
+if(str.charAt(i) == ">"){
+            
+enter = false;
+            
+ans += ">";
+       
+continue;
+        
+}
+        
+if(str.charAt(i) == "<"){
+            
+enter = true;
+            
+ans += "<";
+                       
+continue;
+        
+}
+        
+if(!enter){
+            
+ans += str.charAt(i);
+        
+}
+    
+}
+    
+ 
+ans =   ans.split("<>");
+console.log(ans);
+
+}
+const prev = () => {
+index--;
+console.log(ans[index])
+  navigator.clipboard.writeText(ans[index]);
+ 
+}
+const next = () => {
+index++;
+console.log(ans[index])
+  navigator.clipboard.writeText(ans[index]);
+ 
+}
+</script>
