@@ -1,0 +1,39 @@
+<html>
+
+<input id="table-html" />
+<button onclick="calcCpa()">Calc</button>
+<div id="output"></div>
+<script>
+  const calcCpa = () => {
+    let table = document.getElementById('table-html').value
+    let rows = table.split('</tr>')
+    let sum = 0
+    let cpaSum = 0
+    rows.forEach(val => {
+      let data = val.split('</td>') 
+      let num1 = data[3]?.split('>')[1]
+      let num2 = data[4]?.split('>')[1]
+      let translate = {
+        'A+': 4,
+        'A': 4,
+        'B+': 3.5,
+        'B': 3,
+        'C+': 2.5,
+        'C': 2,
+        'D+': 1.5,
+        'D': 1,
+        'F': 0,
+      }
+      if(!isNaN(num1)){
+        sum += +num1
+        cpaSum += num1 * translate[num2]
+      }
+    })
+    console.log(sum, cpaSum, cpaSum / sum)
+    let output = document.getElementById('output')
+    output.innerHTML = `
+      sum: ${sum} <br> cpa: ${cpaSum / sum} <br> cpa * sum: ${cpaSum}
+    `
+  }
+</script>
+</html>
